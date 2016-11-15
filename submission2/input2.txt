@@ -1,0 +1,22 @@
+insert Ernesto 1
+insert Helene 2
+insert Joyce 3
+show
+insert Debby 4
+insert Florence 5
+insert Leslie 6
+insert Kirk 7
+show
+insert Chris 8
+insert Beryl 9
+show
+insert Gordon 11
+insert Isaac 12
+insert Alberto 10
+show
+remove Leslie
+show
+remove Gordon
+remove Kirk
+remove Florence
+show
