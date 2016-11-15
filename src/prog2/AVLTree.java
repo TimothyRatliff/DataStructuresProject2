@@ -113,10 +113,17 @@ public class AVLTree {
 			if(z.right.height>z.left.height+1)
 				return restructureR(z, z.right);
 		}
-		if (z.left == null) {
+		if (z.left == null && z.right.right != null) {
             return new Node(z.right.name, z.right.data,
                     new Node(z.name, z.data, z.left, z.right.left),
-                    new Node(z.right.right.name, z.right.right.data, z.right.right.left, z.right.right.right));
+                    new Node(z.right.right.name, z.right.right.data, 
+                    		z.right.right.left, z.right.right.right));
+        }
+        if (z.right == null && z.left.left != null) {
+            return new Node(z.left.name, z.left.data,
+                    new Node(z.left.left.name, z.left.left.data, 
+                    		z.left.left.left, z.left.left.right),
+                    new Node(z.name, z.data, z.left.right, z.right));
         }
 		return z;
 	}
