@@ -1,0 +1,12 @@
+insert Earl 5
+insert Colin 3
+insert Fiona 6
+show
+insert Bonnie 2
+insert Danielle 4
+show
+insert Alex 1
+show
+remove Bonnie
+remove Alex
+show
