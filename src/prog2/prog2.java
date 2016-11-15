@@ -12,7 +12,14 @@ public class prog2 {
 		tree.insert("Colin", 3);
 		tree.insert("Fiona", 6);
 		tree.show();
-		
+		tree.insert("Bonnie", 2);
+		tree.insert("Danielle", 4);
+		tree.show();
+		tree.insert("Alex", 1);
+		tree.show();
+		tree.remove("Bonnie");
+		tree.remove("Alex");
+		tree.show();
 
 	}
 
