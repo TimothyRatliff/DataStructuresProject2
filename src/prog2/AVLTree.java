@@ -21,13 +21,7 @@ public class AVLTree {
 		 * @param v a node
 		 * @return the height of the node
 		 */
-	    private int height(Node v) {
-	        if (v == null) {
-	            return -1;
-	        }
-	        return 1 + Math.max(height(v.left), height(v.right));
-	    }
-		
+	    
 	    /**
 	     * Constructs a node
 	     * @param n a name string
@@ -40,9 +34,25 @@ public class AVLTree {
 			this.data = d;    
 			this.left = l;    
 			this.right = r;
-			height = height(this);
+			if(left != null && right != null)
+				height = 1 + Math.max(left.height, right.height);
+			else if(left != null)
+				height = 1 + left.height;
+			else if(right != null)
+				height = 1 + right.height;
+			else if(left == null && right == null)
+				height = 1;
+			else
+				height = 0;
 		}
 	}
+	
+	private int height(Node v) {
+        if (v != null) {
+            return v.height;
+        }
+        return 0;
+    }
 	
 	/**
 	 * Inserts a name and integer as a new node in the tree
@@ -54,13 +64,17 @@ public class AVLTree {
 	}
 	
 	private Node insert(Node v, String k, int d){
-		if(v != null){
-				if(k.compareTo(v.name) >= 0)
-					return toAVL(new Node(v.name, v.data, v.left, insert(v.right, k, d)));
-				else
-					return toAVL(new Node(v.name, v.data, insert(v.left, k, d), v.right));
-		}
-		return new Node(k, d, null, null);
+		if (v == null) {
+            return new Node(k, d, null, null);
+        }
+        else {
+            if (k.compareTo(v.name) > 0) {
+                return toAVL(new Node(v.name, v.data, v.left, insert(v.right, k, d)));
+            }
+            else {
+                return toAVL(new Node(v.name, v.data, insert(v.left, k, d), v.right));
+            }
+        }
 	}
 	
 	/**
@@ -107,29 +121,15 @@ public class AVLTree {
 	 * @return
 	 */
 	private Node toAVL(Node z){
-		if(z.left != null && z.right != null){
-			if(z.left.height>z.right.height+1)
-				return restructureL(z, z.left);
-			if(z.right.height>z.left.height+1)
-				return restructureR(z, z.right);
-		}
-		if (z.left == null && z.right.right != null) {
-            return new Node(z.right.name, z.right.data,
-                    new Node(z.name, z.data, z.left, z.right.left),
-                    new Node(z.right.right.name, z.right.right.data, 
-                    		z.right.right.left, z.right.right.right));
-        }
-        if (z.right == null && z.left.left != null) {
-            return new Node(z.left.name, z.left.data,
-                    new Node(z.left.left.name, z.left.left.data, 
-                    		z.left.left.left, z.left.left.right),
-                    new Node(z.name, z.data, z.left.right, z.right));
-        }
+		if(height(z.left)>height(z.right)+1)
+			return restructureL(z, z.left);
+		if(height(z.right)>height(z.left)+1)
+			return restructureR(z, z.right);
 		return z;
 	}
 	
 	private Node restructureL(Node z, Node y){
-		if (y.left.height >= y.right.height) {
+		if (height(y.left) >= height(y.right)) {
             return restructureLL(z,y,y.left);
         } else {
             return restructureLR(z,y,y.right);
@@ -145,7 +145,7 @@ public class AVLTree {
 	}
 	
 	private Node restructureR(Node z, Node y){
-		if (y.left.height < y.right.height) {
+		if (height(y.left) < height(y.right)) {
             return restructureRR(z, y, y.right);
         } else {
             return restructureRL(z, y, y.left);
