@@ -79,7 +79,7 @@ public class AVLTree {
 	
 	/**
 	 * Removes the node with the given name string
-	 * @param n the given name string 
+	 * @param n the given name string
 	 */
 	public void remove(String n){
 		root = remove(root, n);
@@ -145,7 +145,7 @@ public class AVLTree {
 	}
 	
 	private Node restructureR(Node z, Node y){
-		if (height(y.left) < height(y.right)) {
+		if (height(y.left) <= height(y.right)) {
             return restructureRR(z, y, y.right);
         } else {
             return restructureRL(z, y, y.left);
