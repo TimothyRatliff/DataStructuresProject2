@@ -6,21 +6,24 @@ import java.io.*;
 import java.util.Scanner;
 public class prog2 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException{
+		Scanner input = new Scanner(new File(args[0]));
 		AVLTree tree = new AVLTree();
-		tree.insert("Earl", 5);
-		tree.insert("Colin", 3);
-		tree.insert("Fiona", 6);
-		tree.show();
-		tree.insert("Bonnie", 2);
-		tree.insert("Danielle", 4);
-		tree.show();
-		tree.insert("Alex", 1);
-		tree.show();
-		tree.remove("Bonnie");
-		tree.remove("Alex");
-		tree.show();
-
+		while (input.hasNext()){
+			String str = input.next();
+			if(str.equals("remove"))
+			{
+				tree.remove(input.next());
+			}
+			else if(str.equals("insert"))
+			{
+				tree.insert(input.next(), input.nextInt());
+			}
+			else if(str.equals("show"))
+			{
+				tree.show();
+			}
+		}
+		input.close();
 	}
-
 }
