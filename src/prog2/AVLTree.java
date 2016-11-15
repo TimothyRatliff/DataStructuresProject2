@@ -79,7 +79,7 @@ public class AVLTree {
 	
 	/**
 	 * Removes the node with the given name string
-	 * @param n the given name string
+	 * @param n the given name string 
 	 */
 	public void remove(String n){
 		root = remove(root, n);
