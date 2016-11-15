@@ -169,7 +169,7 @@ public class AVLTree {
 	private void show(Node v, int level){
 		if (v != null) {
             for (int i = 0; i < level; i++) {
-                System.out.print("\t");
+                System.out.print("    ");
             }
             System.out.print(v.name + " " + v.data + "\n");
             show(v.left, level + 1);
